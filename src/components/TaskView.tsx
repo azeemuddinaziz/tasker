@@ -91,13 +91,16 @@ const TaskView = () => {
     if (!editingTask) return;
 
     try {
-      const response = await fetch(`users/editTask?taskId=${editingTask._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editingTask),
-      });
+      const response = await fetch(
+        `api/users/editTask?taskId=${editingTask._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editingTask),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update task");
