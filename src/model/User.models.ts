@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
+import TaskModel, { Task } from "./task.models";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { Task } from "./task.models"; // Adjust import path if needed
 
 export interface User extends Document {
   username: string;
@@ -89,3 +89,5 @@ const UserModel =
   mongoose.models.User || mongoose.model<User>("User", userSchema);
 
 export default UserModel;
+
+console.log("user model");
