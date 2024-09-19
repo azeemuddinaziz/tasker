@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import TaskModel from "@/model/task.models";
 import connectDB from "@/lib/connectDB";
 
-export async function PATCH(req: Request) {
+export async function PUT(req: Request) {
   await connectDB();
 
   const { searchParams } = new URL(req.url);
@@ -26,7 +26,6 @@ export async function PATCH(req: Request) {
   }
 
   try {
-    // Update the task
     const updatedTask = await TaskModel.findByIdAndUpdate(
       taskId,
       {

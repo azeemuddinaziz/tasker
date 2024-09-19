@@ -30,7 +30,7 @@ export const POST = async (req: NextRequest) => {
       user._id,
       { $push: { tasks: newTask._id } },
       { new: true }
-    );
+    ).select("-refreshToken -password");
 
     return NextResponse.json(newUser, { status: 201 });
   } catch (error) {
