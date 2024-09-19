@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/connectDB";
-import TaskModel from "@/model/task.models";
+import TaskModel from "@/model/task.models.ts";
 
 export async function PUT(request: Request) {
   try {
