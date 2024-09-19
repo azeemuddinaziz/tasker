@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
-import TaskModel, { Task } from "./task.models";
+import { Task } from "./task.models";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import TaskModel from "@/model/task.models.ts";
+import TaskModel from "@/model/task.models";
 import connectDB from "@/lib/connectDB";
 
 export async function PUT(req: Request) {
