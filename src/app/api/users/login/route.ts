@@ -1,3 +1,4 @@
+import connectDB from "@/lib/connectDB";
 import User from "@/model/user.models";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -26,6 +27,8 @@ const generateAccessAndRefreshTokens = async (
 
 export const POST = async (req: NextRequest) => {
   try {
+    await connectDB();
+
     const { username, password } = await req.json();
     if (!username) throw "Username is required.";
 
@@ -33,7 +36,6 @@ export const POST = async (req: NextRequest) => {
     if (!user) throw "User not found.";
 
     const isPasswordCorrect = await user.isPasswordCorrect(password);
-    console.log(isPasswordCorrect);
     if (!isPasswordCorrect) throw "Incorrect password.";
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
@@ -51,7 +53,7 @@ export const POST = async (req: NextRequest) => {
     };
 
     cookies().set("accessToken", accessToken);
-    cookies().set("refreshToke", refreshToken);
+    cookies().set("refreshToken", refreshToken);
 
     return NextResponse.json({
       message: "User logged in successfully.",
