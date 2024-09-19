@@ -30,9 +30,7 @@ const KanbanView: React.FC = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch(
-        "https://tasker-sable-gamma.vercel.app/api/users/getTask"
-      );
+      const response = await fetch("api/users/getTask");
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       const tasks: Task[] = data.data.tasks || [];
@@ -143,16 +141,13 @@ const KanbanView: React.FC = () => {
 
   const updateTaskStatus = async (taskId: string, newStatus: string) => {
     try {
-      await fetch(
-        `https://tasker-sable-gamma.vercel.app/api/users/updateTaskStatus`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ taskId, newStatus }),
-        }
-      );
+      await fetch(`api/users/updateTaskStatus`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ taskId, newStatus }),
+      });
     } catch (error) {
       console.error("Error updating task status:", error);
     }

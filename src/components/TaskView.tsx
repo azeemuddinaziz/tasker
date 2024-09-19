@@ -51,9 +51,7 @@ const TaskView = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(
-        "https://tasker-sable-gamma.vercel.app/api/users/getTask"
-      );
+      const response = await fetch("api/users/getTask");
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       setTasks(data.data.tasks || []);
@@ -73,12 +71,9 @@ const TaskView = () => {
 
   const handleDelete = async (taskId: string) => {
     try {
-      await fetch(
-        `https://tasker-sable-gamma.vercel.app/api/users/deleteTask?taskId=${taskId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      await fetch(`api/users/deleteTask?taskId=${taskId}`, {
+        method: "DELETE",
+      });
       // Re-fetch data after deletion
       fetchData();
     } catch (error) {
@@ -96,16 +91,13 @@ const TaskView = () => {
     if (!editingTask) return;
 
     try {
-      const response = await fetch(
-        `https://tasker-sable-gamma.vercel.app/api/users/editTask?taskId=${editingTask._id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editingTask),
-        }
-      );
+      const response = await fetch(`users/editTask?taskId=${editingTask._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editingTask),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to update task");
