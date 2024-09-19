@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export interface Task extends Document {
@@ -46,9 +46,12 @@ export interface User extends Document {
   username: string;
   email: string;
   password: string;
-  accessToken: string;
+  refreshToken: string;
   tasks: Task[];
   createdAt: Date;
+  isPasswordCorrect(enteredPassword: string): Promise<boolean>;
+  generateRefreshToken(): Promise<string>;
+  generateAccessToken(): Promise<string>;
 }
 
 const userSchema: Schema<User> = new Schema({
@@ -71,7 +74,7 @@ const userSchema: Schema<User> = new Schema({
     required: [true, "Password is required."],
   },
 
-  accessToken: {
+  refreshToken: {
     type: String,
   },
 
