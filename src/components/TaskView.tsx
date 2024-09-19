@@ -51,7 +51,9 @@ const TaskView = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/users/getTask");
+      const response = await fetch(
+        "https://tasker-sable-gamma.vercel.app/api/users/getTask"
+      );
       if (!response.ok) throw new Error("Network response was not ok");
       const data = await response.json();
       setTasks(data.data.tasks || []);
@@ -72,7 +74,7 @@ const TaskView = () => {
   const handleDelete = async (taskId: string) => {
     try {
       await fetch(
-        `http://localhost:3000/api/users/deleteTask?taskId=${taskId}`,
+        `https://tasker-sable-gamma.vercel.app/api/users/deleteTask?taskId=${taskId}`,
         {
           method: "DELETE",
         }
@@ -95,7 +97,7 @@ const TaskView = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/users/editTask?taskId=${editingTask._id}`,
+        `https://tasker-sable-gamma.vercel.app/api/users/editTask?taskId=${editingTask._id}`,
         {
           method: "PUT",
           headers: {
