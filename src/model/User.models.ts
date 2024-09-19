@@ -1,46 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
-export interface Task extends Document {
-  owner: User;
-  title: string;
-  description: string;
-  status: string;
-  priority: string;
-  dueDate: Date;
-}
-
-const taskSchema: Schema<Task> = new Schema({
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
-    required: true,
-  },
-
-  title: {
-    type: String,
-    require: true,
-  },
-
-  description: {
-    type: String,
-  },
-
-  status: {
-    type: String,
-    required: true,
-  },
-
-  priority: {
-    type: String,
-    required: true,
-  },
-
-  dueDate: {
-    type: Date,
-  },
-});
+import { Task } from "./task.models"; // Adjust import path if needed
 
 export interface User extends Document {
   username: string;
@@ -57,29 +18,29 @@ export interface User extends Document {
 const userSchema: Schema<User> = new Schema({
   username: {
     type: String,
-    require: [true, "Username is required."],
+    required: [true, "Username is required."],
     trim: true,
     unique: true,
   },
-
   email: {
     type: String,
     required: [true, "Email is required."],
     unique: true,
     match: [/.+\@.+\..+/, "Please use a valid email address"],
   },
-
   password: {
     type: String,
     required: [true, "Password is required."],
   },
-
   refreshToken: {
     type: String,
   },
-
-  tasks: [taskSchema],
-
+  tasks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+    },
+  ],
   createdAt: {
     type: Date,
     required: true,
@@ -125,7 +86,6 @@ userSchema.methods.generateRefreshToken = function () {
 };
 
 const UserModel =
-  (mongoose.models.User as mongoose.Model<User>) ||
-  mongoose.model<User>("User", userSchema);
+  mongoose.models.User || mongoose.model<User>("User", userSchema);
 
 export default UserModel;
