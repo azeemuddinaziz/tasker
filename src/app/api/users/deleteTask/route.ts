@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import TaskModel from "@/model/task.models";
-import UserModel from "@/model/user.models";
+import TaskModel from "@/model/task";
+import UserModel from "@/model/user";
 import connectDB from "@/lib/connectDB";
 
 export async function DELETE(req: Request) {

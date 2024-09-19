@@ -1,6 +1,6 @@
 import connectDB from "@/lib/connectDB";
-import TaskModel from "@/model/task.models";
-import UserModel from "@/model/user.models";
+import TaskModel from "@/model/task";
+import UserModel from "@/model/user";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
