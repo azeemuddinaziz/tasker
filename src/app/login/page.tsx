@@ -137,6 +137,16 @@ const Login = () => {
               </Link>
             </span>
           </CardFooter>
+
+           <Button
+          className="w-full m-2 "
+          variant={"outline"}
+          onClick={() => {
+            setFormData({ username: "Guest", password: "Guest" });
+          }}
+        >
+          Login as Guest
+        </Button>
         </Card>
       </div>
     </div>
