@@ -25,8 +25,8 @@ type FormData = {
 
 const Login = () => {
   const [formData, setFormData] = useState<FormData>({
-    username: "",
-    password: "",
+    username: "Guest",
+    password: "Guest",
   });
   const [error, setError] = useState<string | null>(null); // Error state type
   const [isLoading, setIsLoading] = useState(false);
@@ -88,6 +88,7 @@ const Login = () => {
                 <Input
                   type="text"
                   id="username"
+                  defaultValue="Guest"
                   placeholder="Enter your username"
                   className="focus-visible:ring-transparent w-full"
                   onChange={(e) =>
@@ -102,6 +103,7 @@ const Login = () => {
                 <Input
                   type="password"
                   id="password"
+                  defaultValue="Guest"
                   placeholder="Enter your password"
                   className="focus-visible:ring-transparent w-full"
                   onChange={(e) =>
